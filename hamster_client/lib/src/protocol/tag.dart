@@ -13,29 +13,33 @@ import 'package:serverpod_client/serverpod_client.dart';
 import 'dart:typed_data';
 import 'protocol.dart';
 
-class Example extends SerializableEntity {
+class Tag extends SerializableEntity {
   @override
-  String get className => 'Example';
+  String get className => 'Tag';
 
-  late String name;
-  late int data;
+  int? id;
+  late tag name;
+  String? cover;
 
-  Example({
+  Tag({
+    this.id,
     required this.name,
-    required this.data,
+    this.cover,
   });
 
-  Example.fromSerialization(Map<String, dynamic> serialization) {
+  Tag.fromSerialization(Map<String, dynamic> serialization) {
     var _data = unwrapSerializationData(serialization);
-    name = _data['name']!;
-    data = _data['data']!;
+    id = _data['id'];
+    name = tag.fromSerialization(_data['name']);
+    cover = _data['cover'];
   }
 
   @override
   Map<String, dynamic> serialize() {
     return wrapSerializationData({
-      'name': name,
-      'data': data,
+      'id': id,
+      'name': name.serialize(),
+      'cover': cover,
     });
   }
 }

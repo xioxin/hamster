@@ -13,29 +13,51 @@ import 'package:serverpod_client/serverpod_client.dart';
 import 'dart:typed_data';
 import 'protocol.dart';
 
-class Example extends SerializableEntity {
+class Image extends SerializableEntity {
   @override
-  String get className => 'Example';
+  String get className => 'Image';
 
+  int? id;
+  late int bookId;
+  late String path;
   late String name;
-  late int data;
+  late int page;
+  ZipInfo? zipInfo;
+  String? pHash;
 
-  Example({
+  Image({
+    this.id,
+    required this.bookId,
+    required this.path,
     required this.name,
-    required this.data,
+    required this.page,
+    this.zipInfo,
+    this.pHash,
   });
 
-  Example.fromSerialization(Map<String, dynamic> serialization) {
+  Image.fromSerialization(Map<String, dynamic> serialization) {
     var _data = unwrapSerializationData(serialization);
+    id = _data['id'];
+    bookId = _data['bookId']!;
+    path = _data['path']!;
     name = _data['name']!;
-    data = _data['data']!;
+    page = _data['page']!;
+    zipInfo = _data['zipInfo'] != null
+        ? ZipInfo?.fromSerialization(_data['zipInfo'])
+        : null;
+    pHash = _data['pHash'];
   }
 
   @override
   Map<String, dynamic> serialize() {
     return wrapSerializationData({
+      'id': id,
+      'bookId': bookId,
+      'path': path,
       'name': name,
-      'data': data,
+      'page': page,
+      'zipInfo': zipInfo?.serialize(),
+      'pHash': pHash,
     });
   }
 }

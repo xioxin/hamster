@@ -1,0 +1,8 @@
+class: Book
+
+table: book
+fields:
+  title: String
+  subtitle: String?
+  cover: String?
+  tags: List<int>

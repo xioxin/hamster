@@ -1,0 +1,5 @@
+class: ZipInfo
+
+fields:
+  offset: int
+  length: int

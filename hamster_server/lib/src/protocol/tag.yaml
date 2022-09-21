@@ -1,0 +1,6 @@
+class: Tag
+
+table: tag
+fields:
+  name: tag
+  cover: String?

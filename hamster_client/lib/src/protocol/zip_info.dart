@@ -13,29 +13,29 @@ import 'package:serverpod_client/serverpod_client.dart';
 import 'dart:typed_data';
 import 'protocol.dart';
 
-class Example extends SerializableEntity {
+class ZipInfo extends SerializableEntity {
   @override
-  String get className => 'Example';
+  String get className => 'ZipInfo';
 
-  late String name;
-  late int data;
+  late int offset;
+  late int length;
 
-  Example({
-    required this.name,
-    required this.data,
+  ZipInfo({
+    required this.offset,
+    required this.length,
   });
 
-  Example.fromSerialization(Map<String, dynamic> serialization) {
+  ZipInfo.fromSerialization(Map<String, dynamic> serialization) {
     var _data = unwrapSerializationData(serialization);
-    name = _data['name']!;
-    data = _data['data']!;
+    offset = _data['offset']!;
+    length = _data['length']!;
   }
 
   @override
   Map<String, dynamic> serialize() {
     return wrapSerializationData({
-      'name': name,
-      'data': data,
+      'offset': offset,
+      'length': length,
     });
   }
 }

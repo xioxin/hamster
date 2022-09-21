@@ -1,0 +1,11 @@
+class: Image
+
+table: image
+fields:
+  bookId: int
+  path: String
+  name: String
+  page: int
+  zipInfo: ZipInfo?
+  pHash: String?
+
